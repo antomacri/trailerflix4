@@ -12,6 +12,9 @@ const partialJsonPath = process.env.PARTIAL_JSON_PATH;
 // Inicializamos  el Motor de plantillas elegido 
 app.set('view engine', 'ejs');
 
+// Configuración para servir archivos estáticos desde la carpeta 'public'
+app.use(express.static(path.join(__dirname, 'public')));
+
 //app.use(express.static('views'))
 app.use(express.static(path.join(__dirname,'views')))
 const película= [
