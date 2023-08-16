@@ -1,20 +1,22 @@
-/* styles.css */
+/* Estilo general */
 body {
-  font-family: Arial, sans-serif;
   background-color: #000;
   color: #fff;
+  font-family: Arial, sans-serif;
   margin: 0;
   padding: 0;
 }
 
+/* Estilo para los contenedores */
 .container {
   max-width: 1200px;
   margin: 0 auto;
   padding: 20px;
 }
 
-.header {
-  background-color: #111;
+/* Estilos para los encabezados */
+.header, .navigation {
+  background-color: rgba(0, 0, 0, 0.85);
   padding: 10px 0;
   text-align: center;
 }
@@ -24,22 +26,22 @@ body {
   font-size: 36px;
 }
 
-.navigation {
-  background-color: rgba(0, 0, 0, 0.85);
-  padding: 10px 0;
-  text-align: center;
-}
-
-.navigation a {
+/* Estilos para los enlaces de navegación */
+a {
   color: #fff;
   text-decoration: none;
-  margin: 0 15px;
   font-size: 18px;
+  margin-right: 20px;
+  transition: color 0.3s;
 }
 
-/* Estilo para el botón dentro del enlace en el catálogo */
-.catalog-button,
-.inicio-button {
+/* Cambia el color del enlace cuando se coloca el cursor sobre él */
+a:hover {
+  color: #e50914; /* Color rojo similar al de Netflix */
+}
+
+/* Estilos para los botones */
+.button, .catalog-button, .inicio-button, .nav-button {
   background-color: #e50914;
   color: #fff;
   border: none;
@@ -47,77 +49,195 @@ body {
   font-size: 18px;
   cursor: pointer;
   border-radius: 5px;
-  transition: background-color 0.3s;
-  position: absolute;
-  top: 20px;
+  transition: background-color 0.3s, color 0.3s, border-color 0.3s;
 }
 
-/* Ajustar el botón de catálogo a la derecha */
-.catalog-button {
-  right: 150px;
-}
-
-/* Ajustar el botón de inicio a la derecha y agregar separación */
-.inicio-button {
-  right: 20px;
-  margin-right: 10px;
-}
-
-/* Cambia el color del botón cuando se coloca el cursor sobre él */
-.catalog-button:hover,
-.inicio-button:hover {
+.button:hover, .catalog-button:hover, .inicio-button:hover, .nav-button:hover {
   background-color: #b2070a;
+  color: #fff;
+  border: 1px solid #b2070a;
 }
 
-/* Estilo para los botones de la parte inferior izquierda */
+/* Estilos para los botones inferiores */
 .bottom-buttons {
   position: absolute;
-  bottom: 20px; /* Alineación desde la parte inferior */
-  left: 20px; /* Alineación desde la izquierda */
-  display: flex; /* Mostrar los botones en línea */
-  gap: 10px; /* Espacio entre los botones */
+  bottom: 20px;
+  left: 20px;
+  display: flex;
+  gap: 10px;
 }
 
 .bottom-buttons a {
-  background-color: transparent; /* Sin fondo */
-  color: #fff; /* Color de texto blanco */
+  background-color: transparent;
+  color: #fff;
   text-decoration: none;
-  padding: 5px 10px; /* Espacio interno del botón */
-  transition: background-color 0.3s, color 0.3s; /* Transiciones suaves */
+  padding: 5px 10px;
+  transition: background-color 0.3s, color 0.3s;
 }
 
-/* Cambia el color del enlace y el fondo cuando se coloca el cursor sobre él */
 .bottom-buttons a:hover {
-  color: #b2070a; /* Cambio de color al pasar el cursor */
+  color: #b2070a;
 }
 
-/* Estilo para centrar el texto en el medio de la pantalla */
+/* Estilo para centrar contenido */
 .center-text {
   display: flex;
   justify-content: center;
   align-items: center;
   height: 100vh;
   text-align: center;
-  flex-direction: column; /* Cambia la dirección a vertical */
+  flex-direction: column;
 }
 
-/* Estilo de fuente similar a Netflix para los párrafos */
-.center-text p {
-  font-family: 'Helvetica Neue', sans-serif;
-  font-size: 36px;
+/* Estilos para el carrusel */
+.carousel-item {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+  text-align: center;
+}
+
+.movie-poster {
+  max-width: 100%;
+  height: auto;
+  border-radius: 5px;
+  margin-bottom: 15px;
+}
+
+.movie-title {
+  font-size: 1.2em;
+  font-weight: bold;
+  color: #ffffff;
+  margin-bottom: 15px;
+}
+
+.video-container {
+  position: relative;
+  overflow: hidden;
+  padding-bottom: 56.25%; /* Proporción 16:9 (56.25%) */
+  width: 100%;
+}
+
+.video-container iframe {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  border: none;
+  border-radius: 5px;
+}
+
+/* Estilos para el footer */
+.footer {
+  background-color: #333;
+  color: white;
+  text-align: center;
+  padding: 20px 0;
+  margin-top: 80px;
+}
+
+.footer p {
+  margin: 0;
+  font-size: 14px;
+}
+
+.footer a {
+  color: white;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.footer a:hover {
+  text-decoration: underline;
+}
+
+/* Estilos para la barra de búsqueda */
+.search-bar {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end; /* Alinea a la derecha */
+  margin-top: 10px;
+}
+
+.search-bar form {
+  display: flex;
+  align-items: center;
+}
+
+.search-bar input[type="text"] {
+  border: none;
+  border-bottom: 1px solid #fff;
+  background-color: transparent;
   color: #fff;
-  line-height: 1.2; /* Espaciado entre líneas */
+  padding: 5px;
+  margin-right: 10px;
 }
 
-/* Estilo de la frase de los signos de exclamación */
-.exclamacion {
-  font-size: 28px; /* Tamaño de fuente más pequeño para la frase */
-  font-weight: bold; /* Fuente en negrita para enfatizar */
-  margin-top: -10px; /* Ajusta la separación superior */
+.search-bar button {
+  border: none;
+  background-color: transparent;
+  color: #fff;
+  cursor: pointer;
+  padding: 5px;
+}
+/* Estilos generales */
+body {
+  font-family: Arial, sans-serif;
+  background-color: #000;
+  color: #fff;
+  margin: 0;
+  padding: 0;
 }
 
+/* Estilo para el encabezado */
+.welcome-heading, .welcome-message {
+  text-align: center;
+}
 
+.welcome-heading {
+  font-size: 48px;
+  color: #e50914;
+  margin-top: 120px; /* Ajusta la distancia hacia abajo */
+}
 
+.welcome-message {
+  font-size: 20px;
+  margin-top: 20px; /* Ajusta la distancia hacia abajo */
+}
 
+/* Estilos para el menú de navegación */
+.navbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px 20px;
+  background-color: #111;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 1000;
+}
 
+.navbar-links {
+  display: flex;
+  align-items: center;
+}
 
+.navbar-link {
+  color: #fff;
+  text-decoration: none;
+  margin-right: 20px;
+  font-size: 18px;
+}
+
+/* Estilos para el contenedor de botones */
+.button-container {
+  display: flex;
+  align-items: center; /* Centra verticalmente los botones */
+  justify-content: flex-end; /* Alinea los botones a la derecha */
+  padding: 10px 20px; /* Añade espacio entre los botones y el borde superior */
+}

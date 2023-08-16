@@ -3,6 +3,69 @@
 <head>
     <link rel="stylesheet" type="text/css" href="/styles.css">
     <title>BIENVENIDOS A TRAILERFLIX</title>
+    <style>
+        /* Estilos generales */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+
+        /* Estilo para la imagen de fondo */
+        .background-image {
+            background-image: url('ruta_de_la_imagen.jpg');
+            background-size: cover;
+            background-position: center;
+            height: 100vh;
+        }
+
+        /* Estilo para centrar contenido */
+        .center-text {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 70vh;
+            text-align: center;
+            flex-direction: column;
+            color: #fff;
+        }
+
+        .center-text p.exclamacion {
+            font-size: 36px;
+            font-weight: bold;
+            margin-top: 10px;
+        }
+
+        /* Estilo para el contenedor de botones en la parte superior derecha */
+        .button-container {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            display: flex;
+            align-items: center;
+        }
+
+       /* Estilo para los botones en la parte inferior izquierda */
+       .bottom-buttons {
+            position: absolute;
+            bottom: 20px;
+            left: 20px;
+            display: flex;
+            gap: 10px; /* Espacio entre los botones */
+        }
+
+        .bottom-buttons a {
+            background-color: transparent;
+            color: #fff;
+            text-decoration: none;
+            padding: 5px 10px;
+            transition: color 0.3s;
+        }
+
+        .bottom-buttons a:hover {
+            color: #e50914;
+        }
+    </style>
 </head>
 
 <!--imagen de fondo-->
@@ -15,22 +78,26 @@
       </div>
       
 
-      <!--Boton atalogo-->
+<!-- Contenedor de los botones -->
+<div class="button-container">
+    <!-- Botón Catálogo -->
     <a href="/catalogo">
-    <button class="catalog-button">Ver Catálogo</button>
+        <button class="catalog-button">Ver Catálogo</button>
     </a>
     
-    <!-- boton inicio -->
+    <!-- Botón Inicio -->
     <a href="/inicio">
         <button class="inicio-button">Ir a inicio</button>
     </a>
+</div>
+
     
- <!-- Botones en la parte inferior izquierda -->
-  <div class="bottom-buttons">
-    <a href="#">Títulos</a>
-    <a href="#">Categoría</a>
-    <a href="#">Actor/Actriz</a>
-  </div>
+<!-- Botones en la parte inferior izquierda -->
+<div class="bottom-buttons">
+    <a href="/titulo">Títulos</a>
+    <a href="/categoria">Categoría</a>
+    <a href="/reparto">Actor/Actriz</a>
+</div>
   
    <!--conectamos a app.js-->
   <script src="app.js"></script>
