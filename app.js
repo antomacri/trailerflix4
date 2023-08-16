@@ -11,6 +11,7 @@ const partialJsonPath = process.env.PARTIAL_JSON_PATH;
 
 // Inicializamos  el Motor de plantillas elegido 
 app.set('view engine', 'ejs');
+
 //app.use(express.static('views'))
 app.use(express.static(path.join(__dirname,'views')))
 const película= [
@@ -48,7 +49,9 @@ app.get("/inicio", (req, res) => {
 //Renderiza la vista de index.ejs
 
 app.get('/index',(req,res)=>{
-res.render('index');{ catalogo: TRAILERFLIX}
+
+//me tiraba error
+res.render('index', { catalogo: TRAILERFLIX });
 
 });
 });
