@@ -20,6 +20,8 @@ const película= [
     { name: 'Actriz', price: 0 }
 ]
 
+//css
+app.use(express.static('public'));
 
 // Configurar la ubicación de las vistas (plantillas)
 app.set('views', path.join(__dirname, 'views'));
@@ -29,23 +31,21 @@ app.use(express.json());
 const rawData = fs.readFileSync(partialJsonPath, 'utf-8');
 const TRAILERFLIX = JSON.parse(rawData);
 
-// Endpoint para la ruta raíz
-
+// Ruta raíz (sin mensaje de Bienvenida)
 app.get('/', (req, res) => {
-  const welcomeMessage = '<h1>Bienvenido a TrailerFlix</h1>';
- 
-  res.send(welcomeMessage);
-
+  res.render('index'); // Renderiza la vista index.ejs
+});
 
 // Configurar EJS como el motor de plantillas
 app.set("view engine", "ejs");
 app.set("views", path.join(__dirname, "views"));
 
-app.get("/inicio", (req, res) => {
+// Endpoint para la página de inicio
+app.get('/inicio', (req, res) => {
   // TRAILERFLIX es JSON con las rutas de las imágenes y las URL de los trailers
-  res.render('inicio', {catalogo: TRAILERFLIX });
-  
+  res.render('inicio', { catalogo: TRAILERFLIX });
 });
+
 //Renderiza la vista de index.ejs
 
 app.get('/index',(req,res)=>{
@@ -54,7 +54,7 @@ app.get('/index',(req,res)=>{
 res.render('index', { catalogo: TRAILERFLIX });
 
 });
-});
+
 
 // Endpoint para listar el catálogo completo
 app.get('/catalogo', (req, res) => {
