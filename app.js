@@ -79,10 +79,17 @@ app.get('/titulo/:title', (req, res) => {
     const titleParam = req.params.title.toLowerCase();
     const filteredContent = TRAILERFLIX.filter(item => item.titulo.toLowerCase().includes(titleParam));
     res.json(filteredContent);
+    
   });
   
   // Endpoint para buscar por categoría
   app.get('/categoria/:cat', (req, res) => {
+   
+  
+    // Inicia el servidor
+app.listen(PORT, () => {
+  console.log(`Servidor web iniciado en el puerto ${PORT}`);
+});
     const categoryParam = req.params.cat.toLowerCase();
     const filteredContent = TRAILERFLIX.filter(item => item.categoria.toLowerCase() === categoryParam);
     res.json(filteredContent);
@@ -90,28 +97,35 @@ app.get('/titulo/:title', (req, res) => {
   
   // Endpoint para buscar por actor/actriz en el reparto
   app.get('/reparto/:act', (req, res) => {
-    const actorParam = req.params.act.toLowerCase();
-    const filteredContent = TRAILERFLIX.filter(item => item.reparto.toLowerCase().includes(actorParam));
-    res.json(filteredContent);
+    const { act } = req.params;
+    const matchingContent = TRAILERFLIX.filter(item =>
+      item.cast.some(actor => actor.toLowerCase().includes(act.toLowerCase()))
+    );
+    const reducedContent = matchingContent.map(item => ({
+      titulo: item.title,
+      reparto: item.cast
+    }));
+    res.json(reducedContent);
   });
   
   // Endpoint para obtener la URL del tráiler
   app.get('/trailer/:id', (req, res) => {
-    const idParam = req.params.id;
-    const movie = TRAILERFLIX.find(item => item.id === idParam);
-    if (movie) {
-      if (movie.trailer) {
-        res.json({ url: movie.trailer });
-      } else {
-        res.json({ message: 'Tráiler no disponible para esta película/serie' });
-      }
+    const { id } = req.params;
+    const content = TRAILERFLIX.find(item => item.id === parseInt(id));
+    const trailerUrl = content?.trailer || null;
+    if (trailerUrl) {
+      res.json({ id: content.id, titulo: content.title, trailer: trailerUrl });
     } else {
-      res.status(404).json({ error: 'Película/serie no encontrada' });
+      res.json({ message: "No hay trailer disponible para este contenido." });
     }
   });
   
+  app.patch('/actualizar/:id', (req, res) => {
+    // Código para el endpoint de actualización
+  });
+  
 
-// Aquí puedes agregar los demás endpoints según las búsquedas requeridas
+
 
 app.listen(port, () => {
   console.log(`Servidor web en http://localhost:${port}`);
