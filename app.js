@@ -82,14 +82,9 @@ app.get('/titulo/:title', (req, res) => {
     
   });
   
-  // Endpoint para buscar por categoría
+
+  // Endpoint para buscar por categoría, con mensaje de error
   app.get('/categoria/:cat', (req, res) => {
-   
-  
-    // Inicia el servidor
-app.listen(PORT, () => {
-  console.log(`Servidor web iniciado en el puerto ${PORT}`);
-});
     const categoryParam = req.params.cat.toLowerCase();
     const filteredContent = TRAILERFLIX.filter(item => item.categoria.toLowerCase() === categoryParam);
     res.json(filteredContent);
