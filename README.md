@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 # # trailerflix4
+=======
+# trailerflix3
+>>>>>>> origin
 # PREPARA LOS POCHOCLOS QUE LAS CHICAS BACKEND SE VIENEN CON TODO 
 
 ## SOMOS GRUPO 3 # Hi, PROFES! 👋

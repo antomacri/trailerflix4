@@ -81,11 +81,22 @@ app.get('/titulo/:title', (req, res) => {
     res.json(filteredContent);
   });
   
-  // Endpoint para buscar por categoría
+
+  // Endpoint para buscar por categoría, con mensaje de error
   app.get('/categoria/:cat', (req, res) => {
-    const categoryParam = req.params.cat.toLowerCase();
-    const filteredContent = TRAILERFLIX.filter(item => item.categoria.toLowerCase() === categoryParam);
-    res.json(filteredContent);
+    try {
+      const categoryParam = req.params.cat.toLowerCase();
+      const filteredContent = TRAILERFLIX.filter(item => item.categoria.toLowerCase() === categoryParam);
+  
+      if (filteredContent.length === 0) {
+        return res.status(404).json({ message: 'No se encontró contenido en la categoría especificada.' });
+      }
+  
+      res.json(filteredContent);
+    } catch (error) {
+      console.error('Error:', error);
+      res.status(500).json({ message: 'Hubo un error en el servidor.' });
+    }
   });
   
   // Endpoint para buscar por actor/actriz en el reparto
