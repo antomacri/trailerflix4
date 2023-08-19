@@ -74,53 +74,73 @@ app.get('/buscar', (req, res) => {
   console.log("Se ha llamado a la ruta de búsqueda");
 });
 
-// Endpoint para buscar por título
+//endpoint para busqueda por titulo
 app.get('/titulo/:title', (req, res) => {
-    const titleParam = req.params.title.toLowerCase();
-    const filteredContent = TRAILERFLIX.filter(item => item.titulo.toLowerCase().includes(titleParam));
-    res.json(filteredContent);
-    
-  });
-  
+  const searchTerm = req.params.title.toLowerCase();
+  const results = catalogo.filter(item => item.titulo.toLowerCase().includes(searchTerm));
 
-  // Endpoint para buscar por categoría, con mensaje de error
-  app.get('/categoria/:cat', (req, res) => {
-    const categoryParam = req.params.cat.toLowerCase();
-    const filteredContent = TRAILERFLIX.filter(item => item.categoria.toLowerCase() === categoryParam);
-    res.json(filteredContent);
-  });
+  if (results.length === 0) {
+    res.status(404).json({ error: 'No se encontraron resultados para el título proporcionado.' });
+  } else {
+    res.json(results);
+  }
+});
+
+//endpoint para busqueda por categoria
+app.get('/categoria/:cat', (req, res) => {
+  const category = req.params.cat.toLowerCase();
+  const results = catalogo.filter(item => compareIgnoreCase(item.categoria, category));
+
+  if (results.length === 0) {
+    res.status(404).json({ error: 'No se encontraron resultados para la categoría proporcionada.' });
+  } else {
+    res.json(results);
+  }
+});
+
+//endpoint para busqueda por reparto
+app.get('/reparto/:act', (req, res) => {
+  const actor = req.params.act.toLowerCase();
+  const results = catalogo.filter(item => item.reparto.toLowerCase().includes(actor))
+                         .map(item => ({ titulo: item.titulo, reparto: item.reparto }));
+
+  if (results.length === 0) {
+    res.status(404).json({ error: 'No se encontraron resultados para el actor proporcionado.' });
+  } else {
+    res.json(results);
+  }
+});
+
+//endpoint para busqueda por trailer
+app.get('/trailer/:id', (req, res) => {
+  const id = req.params.id;
+  const item = catalogo.find(item => compareIgnoreCase(item.id, id));
+
+  if (!item) {
+    res.status(404).json({ error: 'No se encontró ningún elemento con el ID proporcionado.' });
+  } else {
+    const result = {
+      id: item.id,
+      titulo: item.titulo,
+      trailer: item.trailer
   
-  // Endpoint para buscar por actor/actriz en el reparto
-  app.get('/reparto/:act', (req, res) => {
-    const { act } = req.params;
-    const matchingContent = TRAILERFLIX.filter(item =>
-      item.cast.some(actor => actor.toLowerCase().includes(act.toLowerCase()))
-    );
-    const reducedContent = matchingContent.map(item => ({
-      titulo: item.title,
-      reparto: item.cast
-    }));
-    res.json(reducedContent);
-  });
-  
-  // Endpoint para obtener la URL del tráiler
-  app.get('/trailer/:id', (req, res) => {
-    const { id } = req.params;
-    const content = TRAILERFLIX.find(item => item.id === parseInt(id));
-    const trailerUrl = content?.trailer || null;
-    if (trailerUrl) {
-      res.json({ id: content.id, titulo: content.title, trailer: trailerUrl });
+app.patch('/actualizar/:id', (req, res) => {
+
+  const idToUpdate = req.params.id;
+  const updates = req.body;
+        
+const itemIndex = catalogo.findIndex(item => compareIgnoreCase(item.id, idToUpdate));
+      
+    if (itemIndex === -1) {
+          res.status(404).json({ error: 'No se encontró ningún elemento con el ID proporcionado.' });
     } else {
-      res.json({ message: "No hay trailer disponible para este contenido." });
-    }
-  });
-  
-  app.patch('/actualizar/:id', (req, res) => {
-    // Código para el endpoint de actualización
-  });
-  
+          const updatedItem = { ...catalogo[itemIndex], ...updates };
+          catalogo[itemIndex] = updatedItem;
+          res.json({ message: 'Elemento actualizado exitosamente.', updatedItem });
+        }
+      });
 
-
+      
 
 app.listen(port, () => {
   console.log(`Servidor web en http://localhost:${port}`);
