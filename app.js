@@ -123,24 +123,33 @@ app.get('/trailer/:id', (req, res) => {
       id: item.id,
       titulo: item.titulo,
       trailer: item.trailer
-  
-app.patch('/actualizar/:id', (req, res) => {
+    }; // Añadir cierre de la estructura del objeto
+    res.json(result);
+  }
+});
 
+app.patch('/actualizar/:id', (req, res) => {
   const idToUpdate = req.params.id;
   const updates = req.body;
-        
-const itemIndex = catalogo.findIndex(item => compareIgnoreCase(item.id, idToUpdate));
-      
-    if (itemIndex === -1) {
-          res.status(404).json({ error: 'No se encontró ningún elemento con el ID proporcionado.' });
-    } else {
-          const updatedItem = { ...catalogo[itemIndex], ...updates };
-          catalogo[itemIndex] = updatedItem;
-          res.json({ message: 'Elemento actualizado exitosamente.', updatedItem });
-        }
-      });
 
-      
+  const itemIndex = catalogo.findIndex(item => compareIgnoreCase(item.id, idToUpdate));
+
+  if (itemIndex === -1) {
+    res.status(404).json({ error: 'No se encontró ningún elemento con el ID proporcionado.' });
+  } else {
+    const updatedItem = { ...catalogo[itemIndex], ...updates };
+    catalogo[itemIndex] = updatedItem;
+    res.json({ message: 'Elemento actualizado exitosamente.', updatedItem });
+  }
+});
+
+
+app.listen(port, () => {
+  console.log(`Servidor web en http://localhost:${port}`);
+});
+
+
+
 
 app.listen(port, () => {
   console.log(`Servidor web en http://localhost:${port}`);
