@@ -33,7 +33,7 @@ app.use(express.json());
 // Cargar datos desde el archivo JSON en una constante TRAILERFLIX
 const rawData = fs.readFileSync(partialJsonPath, 'utf-8');
 const TRAILERFLIX = JSON.parse(rawData);
-
+const catalogo= TRAILERFLIX
 // Ruta raíz (sin mensaje de Bienvenida)
 app.get('/', (req, res) => {
   res.render('index'); // Renderiza la vista index.ejs
@@ -85,7 +85,9 @@ app.get('/titulo/:title', (req, res) => {
     res.json(results);
   }
 });
-
+function compareIgnoreCase(a, b) { 
+  return a.toLowerCase() === b
+}
 //endpoint para busqueda por categoria
 app.get('/categoria/:cat', (req, res) => {
   const category = req.params.cat.toLowerCase();
