@@ -1,62 +1,114 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Netflix</title>
-  <meta charset ="utf-8">
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384 Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-  <script defer src="https://use.fontawesome.com/releases/v5.0.8/js/all.js"></script>
-  <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
-  <title>Netflix</title>
-  </head>
-  
-  <body style="background-color:#000">  
+    <title>Trailerflix</title>
+    <link rel="stylesheet" type="text/css" href="/styles.css">
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <script defer src="https://use.fontawesome.com/releases/v5.0.8/js/all.js"></script>
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+    <style>
+        /* Estilos generales */
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #000;
+            color: #fff;
+            margin: 0;
+            padding: 0;
+        }
+/* Estilo para el encabezado */
+.welcome-heading, .welcome-message {
+    text-align: center;
+}
 
-  </body>
-  
-</html>
-<html>
-<head>
-    <title>Página de Inicio</title>
+.welcome-heading {
+    font-size: 48px;
+    color: #e50914;
+    margin-top: 120px; /* Ajusta la distancia hacia abajo */
+}
+
+.welcome-message {
+    font-size: 20px;
+    margin-top: 20px; /* Ajusta la distancia hacia abajo */
+}
+
+        /* Estilos para el menú de navegación */
+        .navbar {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 10px 20px;
+            background-color: #111;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            z-index: 1000;
+        }
+
+        .navbar-links {
+            display: flex;
+            align-items: center;
+        }
+
+        .navbar-link {
+            color: #fff;
+            text-decoration: none;
+            margin-right: 20px;
+            font-size: 18px;
+        }
+    </style>
 </head>
 <body>
-    <h1>Bienvenido a TRAILERFLIX </h1>
-    <p> ¡Explora y disfruta! de Series y peliculas</p>
 
-    <!-- Agregar botones para navegar a "inicio" y "catalogo" -->
-    <a href="/">Inicio</a>
-    <a href="/catalogo">Catálogo</a>
+<!--Barra de navegación -->
+<nav class="navbar">
+    <div class="navbar-links">
+        <a href="/" class="navbar-link">Volver</a>
+        <a href="/catalogo" class="navbar-link">Catálogo</a>
+    </div>
     <!-- Barra de búsqueda -->
-                 <form action="/buscar" method="get">
-                 <input type="text" name="q" placeholder="Buscar">
-                 <button type="submit">Buscar</button>
-                 </form>
-    <ul>
-        <% catalogo.forEach(item => { %>
-            <li>
-                <strong><%= item.titulo %></strong>
-                <br>
-                <img src="<%= item.imagen %>" alt="<%= item.titulo %>">
-                <br>
-                <!-- Embeber el video del trailer -->
-                <iframe width="560" height="315" src="<%= item.trailer %>" frameborder="0" allowfullscreen></iframe>
-            
-                   
-            </li>
-            
-        <% }); %>
-    </ul>
-</body>
-</html>
-<html lang="en">
-<head>
-   
-</head>
-<body>
+    <div class="search-bar">
+        <form action="/buscar" method="get">
+            <input type="text" name="q" placeholder="Buscar">
+            <button type="submit"><i class="fas fa-search"></i></button>
+        </form>
+    </div>
+</nav>
+
+    
+    <!-- Contenido de la página -->
+    <div class="content">
+        <h1 class="welcome-heading">Bienvenido a TRAILERFLIX</h1>
+        <p class="welcome-message">¡Explora y disfruta de Series y películas!</p>
+    </div>
+
+    <!-- Carrusel de películas -->
+    <div id="movieCarousel" class="carousel slide" data-ride="carousel">
+        <div class="carousel-inner">
+            <% catalogo.forEach((item, index) => { %>
+                <div class="carousel-item <%= index === 0 ? 'active' : '' %>">
+                    <div class="movie-item">
+                        <img src="<%= item.poster %>" alt="<%= item.titulo %>" class="movie-poster">
+                        <div class="movie-title"><%= item.titulo %></div>
+                        <div class="video-container">
+                            <iframe src="<%= item.trailer %>" frameborder="0" allowfullscreen></iframe>
+                        </div>
+                    </div>
+                </div>
+            <% }); %>
+        </div>
+        <a class="carousel-control-prev" href="#movieCarousel" role="button" data-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="sr-only">Previous</span>
+        </a>
+        <a class="carousel-control-next" href="#movieCarousel" role="button" data-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="sr-only">Next</span>
+        </a>
+    </div>
 
     <!-- Incluye el footer -->
     <%- include('footer') %>
 </body>
 </html>
-
-
-

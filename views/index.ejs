@@ -1,27 +1,109 @@
 <!DOCTYPE html>
 <html>
 <head>
+    <link rel="stylesheet" type="text/css" href="/styles.css">
     <title>BIENVENIDOS A TRAILERFLIX</title>
-</head>
-<body>
-    <!--Boton de catalogo-->
-    <p>Un mundo lleno de series y pelicula AGARRA LOS POCHOLOS !</p>
-    <a href="/catalogo">
-        <button>Ver Catálogo</button>
-      <!-- Barra de búsqueda -->
-    <form action="/buscar" method="get">
-        <input type="text" name="q" placeholder="Buscar">
-        <button type="submit">Buscar</button>
-    </form>
-                <a href="">Inicio</a>
-                 <a href="/">
-        <button class="button"> Volver a HOME </button>
+    <style>
+        /* Estilos generales */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
 
-        </a>
-				<a href="#">Titulos</a>
-				<a href="#">categoria</a>
-				<a href="#">Actor/actriz</a>
-				<a href="#">Mi lista</a>
+        /* Estilo para la imagen de fondo */
+        .background-image {
+            background-image: url('ruta_de_la_imagen.jpg');
+            background-size: cover;
+            background-position: center;
+            height: 100vh;
+        }
+
+        /* Estilo para centrar contenido */
+        .center-text {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 70vh;
+            text-align: center;
+            flex-direction: column;
+            color: #fff;
+        }
+
+        .center-text p.exclamacion {
+            font-size: 36px;
+            font-weight: bold;
+            margin-top: 10px;
+        }
+
+        /* Estilo para el contenedor de botones en la parte superior derecha */
+        .button-container {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            display: flex;
+            align-items: center;
+        }
+
+       /* Estilo para los botones en la parte inferior izquierda */
+       .bottom-buttons {
+            position: absolute;
+            bottom: 20px;
+            left: 20px;
+            display: flex;
+            gap: 10px; /* Espacio entre los botones */
+        }
+
+        .bottom-buttons a {
+            background-color: transparent;
+            color: #fff;
+            text-decoration: none;
+            padding: 5px 10px;
+            transition: color 0.3s;
+        }
+
+        .bottom-buttons a:hover {
+            color: #e50914;
+        }
+    </style>
+</head>
+
+<!--imagen de fondo-->
+<body class="background-image">
+    
+    <!--leyenda-->
+    <div class="center-text">
+        <p>Un mundo lleno de series<br>y películas</p>
+        <p class="exclamacion">¡AGARRA LOS<br>POCHOCLOS!</p>
+      </div>
+      
+
+<!-- Contenedor de los botones -->
+<div class="button-container">
+    <!-- Botón Catálogo -->
+    <a href="/catalogo">
+        <button class="catalog-button">Ver Catálogo</button>
     </a>
+    
+    <!-- Botón Inicio -->
+    <a href="/inicio">
+        <button class="inicio-button">Ir a inicio</button>
+    </a>
+</div>
+
+    
+<!-- Botones en la parte inferior izquierda // poner :/( para corregir )--> 
+<div class="bottom-buttons">
+    <a href=":/titulo">Títulos</a>
+    <a href="/categoria">Categoría</a>
+    <a href="/reparto">Actor/Actriz</a>
+    <a href="/trailer/1">Ver Trailer por ID: 1</a>
+</div>
+  
+   <!--conectamos a app.js-->
+  <script src="app.js"></script>
+
 </body>
 </html>
+
+
