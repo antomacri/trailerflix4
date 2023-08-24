@@ -17,6 +17,9 @@
 - [@Ludmila](https://github.com/LudmilaRamella)
 - [@antomacri](https://github.com/antomacri)
 
+# como levantar el proyecto
+> nodemon app.js
+
 
 
 

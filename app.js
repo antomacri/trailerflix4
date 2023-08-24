@@ -7,7 +7,7 @@ dotenv.config();
 
 const app = express();
 const port = process.env.PORT || 3008;
-const partialJsonPath = process.env.PARTIAL_JSON_PATH;
+const partialJsonPath = process.env.PARTIAL_JSON_PATH || '';
 
 // Inicializamos  el Motor de plantillas elegido 
 app.set('view engine', 'ejs');
@@ -150,7 +150,3 @@ app.listen(port, () => {
 
 
 
-
-app.listen(port, () => {
-  console.log(`Servidor web en http://localhost:${port}`);
-});
